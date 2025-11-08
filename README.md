@@ -13,22 +13,19 @@ Make healthy habits **simple, measurable, and delightful** — combining **light
 ## 🗂️ Table of Contents
 1. [Project Overview](#project-overview)  
 2. [Features](#features)  
-3. [Tech Stack & Tools](#tech-stack--tools)  
-4. [Architecture & Data Model](#architecture--data-model)  
-5. [API Reference](#api-reference)  
-6. [Frontend Structure](#frontend-structure)  
-7. [Getting Started (Local Setup)](#getting-started-local-setup)  
-8. [Environment Variables](#environment-variables)  
-9. [Deployment Guide](#deployment-guide)  
-10. [Security & Best Practices](#security--best-practices)  
-11. [Testing & Debugging](#testing--debugging)  
-12. [Future Roadmap](#future-roadmap)  
-13. [Contributors & Contact](#contributors--contact)  
-14. [License](#license)
+3. [Tech Stack & Tools](#tech-stack--tools)    
+4. [Project Structure](#project-structure)  
+5. [Setup and installation](#setup-and-installation)  
+6. [User Guide](#user-guide)  
+7. [Backend Services](#backend-services)  
+8. [Frontend Application](#frontend-application)  
+9. [License](#license)
+10. [Contact & Support](#contact--support)
+
 
 ---
 
-##  Project Overview 🧩
+##  Project Overview 
 **Serene Strength** empowers users to manage and track their **daily, weekly, and long-term wellness goals** across three main areas:
 
 ### 🥗 Nutrition
@@ -57,7 +54,7 @@ Additional highlights:
 
 ---
 
-## ✨ Features
+## Features
 
 ### 🔐 Authentication & User Management
 - Secure **register/login** using **bcrypt** password hashing  
@@ -108,7 +105,7 @@ Additional highlights:
 
 ---
 
-## 🧰 Tech Stack & Tools
+## Tech Stack & Tools
 
 ### 🖥️ Frontend
 - **HTML5**, **CSS3** , **Tailwind CSS** (modern, responsive, animated)  
@@ -139,26 +136,121 @@ Additional highlights:
 - **Git / GitHub** — for collaboration and versioning  
 
 ---
+###  Project Structure
 
-## 🧱 Architecture & Data Model
+```│
+├── 📁 backend/
+│ ├── 📄 server.js # Entry point of backend server (Express + MongoDB)
+│ ├── 📁 config/
+│ │ └── db.js # MongoDB connection setup using Mongoose
+│ ├── 📁 routes/
+│ │ ├── authRoutes.js # Handles user registration, login, and JWT logic
+│ │ ├── aiRoutes.js # Gemini AI chatbot route integration
+│ │ └── profileRoutes.js # (optional) user profile handling if added later
+│ ├── 📁 models/
+│ │ └── User.js # User schema storing auth + profile data
+│ ├── 📁 middleware/
+│ │ └── authMiddleware.js # JWT authentication verification
+│ ├── 📄 .env # Environment variables (MongoDB URI, API keys)
+│ ├── 📄 package.json # Backend dependencies and scripts
+│ ├── 📄 package-lock.json # Locked versions of dependencies
+│ └── 📁 node_modules/ # Auto-generated dependencies (ignored in git)
+│
+├── 📁 frontend/
+│ ├── 📄 index.html # Landing page (motivational intro)
+│ ├── 📄 login.html # Login interface for users
+│ ├── 📄 register.html # User registration form
+│ ├── 📄 post-login-temp.html # Redirect page after login
+│ ├── 📄 profile.html # User’s dashboard with all goals, cards & tracker
+│ ├── 📄 chat.html # Gemini AI-powered chatbot interface
+│ ├── 📄 style.css # Global styles and animations
+│ ├── 📄 profile-backup2.html # Dashboard and cards styling
+│ ├── 📄 profile.css # Chat UI and animations
+│ ├── 📄 script.js # Handles UI logic, authentication, and API calls
+│ ├── 📄 yourfav.html
+│ ├── 📄 login.css
+│ │
+│ ├── 📁 extra_pages/ # Optional: store less-used or archived HTML/CSS files
+│ │ ├── healthy-diet.html
+│ │ ├── contact.html
+│ │ ├── settings.html
+│ │ └── signup.html
+│ │ └── motivation.css
+│ │ └── diet-post-login.html
+│ │ └── privacypolicy.html
+│ │ └── motivation.css
+│ │ └── termscondition.html
+│ │ └── trainer.html
+│ │ └── workout-plans.html
+│ │ └── workout-post-login.html
+│ │ └── yoga-meditation.html
+│ │ └── yoga-postlogin.html
+│ │
+│ └── 📁 assets/ # Optional: images, icons, backgrounds
+│ ├── logo.png
+│ └── bg.jpg
+├──
+|
+```
 
-### High-Level Architecture
-- **Frontend (Static)** — served via static hosting or local server  
-- **Backend (Express)** — handles authentication, routes, AI proxy, and CRUD  
-- **MongoDB Atlas** — stores persistent user and activity data  
+## Setup and installation
 
-### Example: `User` Model (Mongoose)
-```js
-{
-_id: ObjectId,
-username: String,
-email: String,
-password: String, // hashed
-avatarUrl: String,
-goals: [Object],
-activities: [Object],
-favourites: [Object],
-createdAt: Date,
-updatedAt: Date
-}
+-**1. Clone the repository**
+git clone https://github.com/algo-ace04/Serene_Strength.git
+cd Serene_Strength
+
+-**2. Install dependencies**
+ : npm install
+
+
+-**3. Run local development server**
+ : npm run dev
+
+###  User Guide
+
+**Serene Strength** helps you track and improve your wellness:
+
+- **Nutrition:** Log water intake and meals; track macronutrients; edit or delete entries.  
+- **Workouts:** Select routines (beginner → advanced), track minutes with timers, mark favourites, and manage daily routines.  
+- **Mindfulness:** Track yoga/meditation by genre, combine multiple routines, log minutes completed.  
+- **Weekly Goals:** Set goals for workouts, nutrition, or mindfulness; track progress with bars and motivational messages.  
+- **Activity Calendar:** View 30-day heatmap of activity; click a date for session details.  
+- **AI Assistant:** Tap floating chat icon for tips; confirm suggestions to save to dashboard.  
+- **Profile:** Update personal details, view achievements, and monitor overall progress.  
+
+**Tip:** Keep the app online to ensure progress is synced and AI recommendations are accurate.
+
+###  Backend Services
+
+Node.js + Express.js backend with MongoDB (via Mongoose) to store user profiles, wellness data, and chatbot interactions.  
+Authentication uses `bcrypt.js` and JWT for secure login sessions.  
+API routes: `authRoutes.js` (login/registration), `profileRoutes.js` (user data), `aiRoutes.js` (Gemini AI chatbot).  
+Database models: User (credentials, profile, goals); extendable for meditation, nutrition, and progress logs.  
+Core services include error handling, input validation, CORS, and `server.js` initializes the server and connects DB.
+
+
+###  Frontend Application
+
+**Pages:** Home (landing), Login, Register, Post-Login Redirect, Profile Dashboard, Chatbot, Extra Pages (About, Contact, Achievements), etc.  
+
+**Components:** Workout Tracker, Nutrition Tracker, Mindfulness Tracker, Weekly Goals, Activity Heatmap, AI Assistant Panel, Favourites Section, Collapsible Sidebar, Toast Notifications, and more.  
+
+**Contexts:** AuthContext for authentication and JWT token handling.  
+
+**Styling:** Tailwind CSS for responsive design, global styles, and animated UI components; custom CSS for dashboards, cards, and chatbot interface.  
+
+**Scripts:** `script.js` handles UI logic, authentication, API calls, and dynamic dashboard updates.
+
+###  License
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+
+###  Contact & Support
+
+For questions, suggestions, or support, please open an **issue** or contact the maintainers via **GitHub**.
+
+Thank you for being a part of **Serene Strength**!
+
+
+
 
