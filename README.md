@@ -28,7 +28,7 @@ Make healthy habits **simple, measurable, and delightful** — combining **light
 
 ---
 
-## 🧩 Project Overview
+##  Project Overview 🧩
 **Serene Strength** empowers users to manage and track their **daily, weekly, and long-term wellness goals** across three main areas:
 
 ### 🥗 Nutrition
